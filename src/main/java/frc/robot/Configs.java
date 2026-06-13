@@ -21,7 +21,7 @@ public final class Configs {
       double drivingVelocityFeedForward = nominalVoltage / ModuleConstants.kDriveWheelFreeSpeedRps;
 
       drivingConfig
-        .idleMode(IdleMode.kBrake)
+        .idleMode(IdleMode.kCoast)
         .smartCurrentLimit(50);   // 70 for SparkFlex
       drivingConfig
         .encoder
@@ -31,12 +31,13 @@ public final class Configs {
         .closedLoop
           .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
           // These are example gains you may need to adjust them for your own robot!
-          .pid(0.04, 0, 0)
+          .pid(0.02, 0, 0)
           .outputRange(-1, 1)
         .feedForward
           .kV(drivingVelocityFeedForward);
 
       turningConfig
+      
         .idleMode(IdleMode.kBrake)
         .smartCurrentLimit(20);   // 70 for SparkFlex
       turningConfig
