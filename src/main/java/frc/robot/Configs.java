@@ -31,8 +31,8 @@ public final class Configs {
         .closedLoop
           .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
           // These are example gains you may need to adjust them for your own robot!
-          .pid(0.02, 0, 0)
-          .outputRange(-1, 1)
+          .pid(0.01, 0, 0)
+          .outputRange(-.8, .8)
         .feedForward
           .kV(drivingVelocityFeedForward);
 
@@ -54,8 +54,8 @@ public final class Configs {
         .closedLoop
           .feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
           // These are example gains you may need to adjust them for your own robot!
-          .pid(1, 0, 0)
-          .outputRange(-1, 1)
+          .pid(0.4, 0, 0)
+          .outputRange(-.8, .8)
           // Enable PID wrap around for the turning motor. This will allow the PID
           // controller to go through 0 to get to the setpoint i.e. going from 350 degrees
           // to 10 degrees will go through 0 rather than the other direction which is a
