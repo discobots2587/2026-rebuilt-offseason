@@ -157,18 +157,54 @@ public final class Constants {
 
     public static final class IntakeMotorSetPoints{
 
-      public static double kIntakeFeed = 0;
-      public static double kIntakeOut = 0; 
+      public static double kIntakeFeed = 0.0;
+      public static double kIntakeOut = 0.0; 
 
       //PLEASE READ THIS BEFORE CHANGING OUT VALUES: slowly test out values 
-      public static double kIntakeRackOut = 0; // as name suggests, the intake will be going OUTWARDS
-      public static double kIntakeRackIn = 0; // as name suggests, the intake will be going INWARDS to the position 0
+      public static double kIntakeRackOut = 0.0; // as name suggests, the intake will be going OUTWARDS
+      public static double kIntakeRackIn = 0.0; // as name suggests, the intake will be going INWARDS to the position 0
 
+
+    }
+    
+  }
+
+  public static final class ShooterSubsystemConstants{
+
+    public static final int kflywheelMotorCanID = 4;
+    public static final int kflywheelFollowerMotorCanID = 44;
+
+    public static final int ktopIndexerMotorCanID = 5;
+    public static final int ktopFollowerMotorIndexerCanID = 55;
+
+    public static final int kbotIndexerMotorCanID = 6;
+    public static final int kbotFollowerIndexerMotorCanID = 61; //may become 66 
+
+    //PID for flywheel
+    public static final double kFlywheelP = 0.0;
+    public static final double kFlywheelI = 0.0;
+    public static final double kFlywheelD = 0.0;
+
+    //PID for top indexer
+    public static final double ktopIndexerP = 0.0;
+    public static final double ktopIndexerI = 0.0;
+    public static final double ktopIndexerD = 0.0;
+
+    //PID for bot indexer
+    public static final double kbotIndexerP = 0.0;
+    public static final double kbotIndexerI = 0.0;
+    public static final double kbotIndexerD = 0.0;
+
+    public static final class ShooterSubsystemSetPoints{
+
+      public static double kFlywheelShoot = 0.0;
+      public static double ktopIndex = 0.0;
+      public static double kbotIndex = 0.0;
 
     }
 
 
-    
+
   }
 
 }

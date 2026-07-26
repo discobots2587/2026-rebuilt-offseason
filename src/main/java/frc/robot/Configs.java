@@ -2,6 +2,7 @@ package frc.robot;
 
 import com.revrobotics.spark.config.AbsoluteEncoderConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.FeedbackSensor;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
@@ -78,7 +79,7 @@ public final class Configs {
         .d(Constants.FloorSubsystemConstants.kFloorD);
 
         floorMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(20); // change stall limit if needed also Coast for free roll
-        floorMotorFollowerConfig.apply(floorMotorConfig).follow(Constants.FloorSubsystemConstants.kFloorFollowerMotorCanID, false); // shouldnt be inverted but can change if needed
+        floorMotorFollowerConfig.apply(floorMotorConfig).follow(Constants.FloorSubsystemConstants.kFloorFollowerMotorCanID, true); // shouldnt be inverted but can change if needed
 
     }
 
@@ -97,7 +98,7 @@ public final class Configs {
       .d(Constants.IntakeSubsystemConstants.kIntakeD);
 
       intakeMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(20); 
-      intakeFollowerMotorConfig.apply(intakeMotorConfig).follow(Constants.IntakeSubsystemConstants.kIntakeFollowerMotorCanID, false); 
+      intakeFollowerMotorConfig.apply(intakeMotorConfig).follow(Constants.IntakeSubsystemConstants.kIntakeFollowerMotorCanID, true); 
 
 
       intakeRackMotorConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)
@@ -109,6 +110,44 @@ public final class Configs {
 
     }
 
-
 }
+
+
+  public final class ShooterSubsystem{
+
+        public static final SparkFlexConfig flywheelMotorConfig = new SparkFlexConfig();
+        public static final SparkFlexConfig flywheelFollowerMotorConfig = new SparkFlexConfig();
+
+        public static final SparkMaxConfig topIndexerMotorConfig = new SparkMaxConfig();
+        public static final SparkMaxConfig topIndexerFollowerMotorConfig = new SparkMaxConfig();
+
+        public static final SparkMaxConfig botIndexerMotorConfig = new SparkMaxConfig();
+        public static final SparkMaxConfig botIndexerFollowerMotorConfig = new SparkMaxConfig();
+        
+      static {
+        flywheelMotorConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)
+        .p(Constants.ShooterSubsystemConstants.kFlywheelP)
+        .i(Constants.ShooterSubsystemConstants.kFlywheelI)
+        .d(Constants.ShooterSubsystemConstants.kFlywheelD);
+        flywheelMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(20);
+        flywheelFollowerMotorConfig.apply(flywheelMotorConfig).follow(Constants.ShooterSubsystemConstants.kflywheelMotorCanID, true);
+
+        topIndexerMotorConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)
+        .p(Constants.ShooterSubsystemConstants.kFlywheelP)
+        .i(Constants.ShooterSubsystemConstants.kFlywheelI)
+        .d(Constants.ShooterSubsystemConstants.kFlywheelD);
+        topIndexerMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(20);
+        topIndexerFollowerMotorConfig.apply(topIndexerMotorConfig).follow(Constants.ShooterSubsystemConstants.ktopIndexerMotorCanID, true);
+
+
+       botIndexerMotorConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)
+        .p(Constants.ShooterSubsystemConstants.kFlywheelP)
+        .i(Constants.ShooterSubsystemConstants.kFlywheelI)
+        .d(Constants.ShooterSubsystemConstants.kFlywheelD);
+        botIndexerMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(20);
+        botIndexerFollowerMotorConfig.apply(botIndexerMotorConfig).follow(Constants.ShooterSubsystemConstants.kbotIndexerMotorCanID, true);
+
+      }
+
+      }
 }
