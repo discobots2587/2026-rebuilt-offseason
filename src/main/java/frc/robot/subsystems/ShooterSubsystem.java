@@ -26,17 +26,17 @@ public class ShooterSubsystem extends SubsystemBase {
     private final SparkFlex flywheelFollowerMotor = new SparkFlex(Constants.ShooterSubsystemConstants.kflywheelFollowerMotorCanID, SparkFlex.MotorType.kBrushless);
 
 
-    private final SparkMax topIndexerMotor = new SparkMax(Constants.ShooterSubsystemConstants.kflywheelMotorCanID, SparkFlex.MotorType.kBrushless);
+    private final SparkMax topIndexerMotor = new SparkMax(Constants.ShooterSubsystemConstants.ktopIndexerMotorCanID, SparkFlex.MotorType.kBrushless);
     private RelativeEncoder topIndexerEncoder = topIndexerMotor.getEncoder();
     private SparkClosedLoopController topIndexerController = topIndexerMotor.getClosedLoopController();
 
-    private final SparkMax topIndexerFollowerMotor = new SparkMax(Constants.ShooterSubsystemConstants.kflywheelFollowerMotorCanID, SparkFlex.MotorType.kBrushless);
+    private final SparkMax topIndexerFollowerMotor = new SparkMax(Constants.ShooterSubsystemConstants.ktopFollowerMotorIndexerCanID, SparkFlex.MotorType.kBrushless);
 
-    private final SparkMax botIndexerMotor = new SparkMax(Constants.ShooterSubsystemConstants.kflywheelMotorCanID, SparkFlex.MotorType.kBrushless);
+    private final SparkMax botIndexerMotor = new SparkMax(Constants.ShooterSubsystemConstants.kbotIndexerMotorCanID, SparkFlex.MotorType.kBrushless);
     private RelativeEncoder botIndexerEncoder = botIndexerMotor.getEncoder();
     private SparkClosedLoopController botIndexerController = botIndexerMotor.getClosedLoopController();
 
-    private final SparkMax botIndexerFollowerMotor = new SparkMax(Constants.ShooterSubsystemConstants.kflywheelFollowerMotorCanID, SparkFlex.MotorType.kBrushless);
+    private final SparkMax botIndexerFollowerMotor = new SparkMax(Constants.ShooterSubsystemConstants.kbotFollowerIndexerMotorCanID, SparkFlex.MotorType.kBrushless);
 
 
     public ShooterSubsystem(){
