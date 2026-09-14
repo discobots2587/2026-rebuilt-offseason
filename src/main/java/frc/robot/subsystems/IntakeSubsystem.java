@@ -69,7 +69,6 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public void setIntakeRackPosition(double p){ //p is for position in rotations
         intakeRackController.setSetpoint(p, ControlType.kPosition); //position controlled based on rotations
-
     }
 
     public Command outIntakeRack(){

@@ -101,12 +101,12 @@ public final class Configs {
       intakeFollowerMotorConfig.apply(intakeMotorConfig).follow(Constants.IntakeSubsystemConstants.kIntakeFollowerMotorCanID, true); 
 
 
-      intakeRackMotorConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)
+      intakeRackMotorConfig.closedLoop.feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
       .p(Constants.IntakeSubsystemConstants.kIntakeRackP)
       .i(Constants.IntakeSubsystemConstants.kIntakeRackI)
       .d(Constants.IntakeSubsystemConstants.kIntakeRackD);
 
-      intakeRackMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(20); 
+      intakeRackMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(30); 
 
     }
 
@@ -129,14 +129,15 @@ public final class Configs {
         .p(Constants.ShooterSubsystemConstants.kFlywheelP)
         .i(Constants.ShooterSubsystemConstants.kFlywheelI)
         .d(Constants.ShooterSubsystemConstants.kFlywheelD);
-        flywheelMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(20);
+        flywheelMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(30);
+        
         flywheelFollowerMotorConfig.apply(flywheelMotorConfig).follow(Constants.ShooterSubsystemConstants.kflywheelMotorCanID, true);
 
         topIndexerMotorConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)
         .p(Constants.ShooterSubsystemConstants.kFlywheelP)
         .i(Constants.ShooterSubsystemConstants.kFlywheelI)
         .d(Constants.ShooterSubsystemConstants.kFlywheelD);
-        topIndexerMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(20);
+        topIndexerMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(30);
         topIndexerFollowerMotorConfig.apply(topIndexerMotorConfig).follow(Constants.ShooterSubsystemConstants.ktopIndexerMotorCanID, true);
 
 
@@ -144,7 +145,7 @@ public final class Configs {
         .p(Constants.ShooterSubsystemConstants.kFlywheelP)
         .i(Constants.ShooterSubsystemConstants.kFlywheelI)
         .d(Constants.ShooterSubsystemConstants.kFlywheelD);
-        botIndexerMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(20);
+        botIndexerMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(30);
         botIndexerFollowerMotorConfig.apply(botIndexerMotorConfig).follow(Constants.ShooterSubsystemConstants.kbotIndexerMotorCanID, true);
 
       }

@@ -25,7 +25,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
     private final SparkFlex flywheelFollowerMotor = new SparkFlex(Constants.ShooterSubsystemConstants.kflywheelFollowerMotorCanID, SparkFlex.MotorType.kBrushless);
 
-
     private final SparkMax topIndexerMotor = new SparkMax(Constants.ShooterSubsystemConstants.ktopIndexerMotorCanID, SparkFlex.MotorType.kBrushless);
     private RelativeEncoder topIndexerEncoder = topIndexerMotor.getEncoder();
     private SparkClosedLoopController topIndexerController = topIndexerMotor.getClosedLoopController();

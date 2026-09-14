@@ -27,7 +27,7 @@ public final class Constants {
     // the robot, rather the allowed maximum speeds
     public static final double kMaxSpeedMetersPerSecond = 4.8;
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
-    public static final double kOutputRange = 0.8;
+    public static final double kOutputRange = .99;
 
     // Chassis configuration
     public static final double kTrackWidth = Units.inchesToMeters(25.5);
@@ -159,11 +159,12 @@ public final class Constants {
     public static final double kIntakeRackD = 0.0;
 
     public static final class IntakeMotorSetPoints{
-
-      public static double kIntakeFeed = 0.0;
-      public static double kIntakeOut = 0.0; 
+      
+      public static double kIntakeFeed = .50; 
+      public static double kIntakeOut = -.50; 
 
       //PLEASE READ THIS BEFORE CHANGING OUT VALUES: slowly test out values 
+      //Position is in rotations
       public static double kIntakeRackOut = 0.0; // as name suggests, the intake will be going OUTWARDS
       public static double kIntakeRackIn = 0.0; // as name suggests, the intake will be going INWARDS to the position 0
 
