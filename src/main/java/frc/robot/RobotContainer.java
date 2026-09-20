@@ -103,10 +103,12 @@ public class RobotContainer {
 
     m_driverController.leftTrigger().toggleOnTrue(m_intake.inIntakeRack());
     m_driverController.rightTrigger().toggleOnTrue(m_intake.outIntakeRack());
-    m_driverController.rightBumper().toggleOnTrue(m_intake.feedIntake());
+    m_driverController.rightBumper().whileTrue(m_intake.feedIntake());
 
     m_operatorController.y().toggleOnTrue(m_floor.feedShooter()); 
     m_operatorController.b().toggleOnTrue(m_shooter.shoot()); 
+    m_operatorController.pov(180).whileTrue(m_shooter.unjamST());
+    m_operatorController.pov(180).whileTrue(m_floor.unJamINDX());
 
 
 

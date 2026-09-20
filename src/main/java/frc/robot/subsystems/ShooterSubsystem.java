@@ -31,12 +31,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
     private final SparkMax topIndexerFollowerMotor = new SparkMax(Constants.ShooterSubsystemConstants.ktopFollowerMotorIndexerCanID, SparkFlex.MotorType.kBrushless);
 
-    private final SparkMax botIndexerMotor = new SparkMax(Constants.ShooterSubsystemConstants.kbotIndexerMotorCanID, SparkFlex.MotorType.kBrushless);
-    private RelativeEncoder botIndexerEncoder = botIndexerMotor.getEncoder();
-    private SparkClosedLoopController botIndexerController = botIndexerMotor.getClosedLoopController();
-
-    private final SparkMax botIndexerFollowerMotor = new SparkMax(Constants.ShooterSubsystemConstants.kbotFollowerIndexerMotorCanID, SparkFlex.MotorType.kBrushless);
-
 
     public ShooterSubsystem(){
         flywheelMotor.configure(Configs.ShooterSubsystem.flywheelMotorConfig, SparkFlex.ResetMode.kResetSafeParameters, SparkFlex.PersistMode.kPersistParameters);
@@ -45,39 +39,45 @@ public class ShooterSubsystem extends SubsystemBase {
         topIndexerMotor.configure(Configs.ShooterSubsystem.topIndexerMotorConfig, SparkMax.ResetMode.kResetSafeParameters, SparkMax.PersistMode.kPersistParameters);
         topIndexerFollowerMotor.configure(Configs.ShooterSubsystem.topIndexerFollowerMotorConfig, SparkMax.ResetMode.kResetSafeParameters, SparkMax.PersistMode.kPersistParameters);
 
-        botIndexerMotor.configure(Configs.ShooterSubsystem.botIndexerMotorConfig, SparkMax.ResetMode.kResetSafeParameters, SparkMax.PersistMode.kPersistParameters);
-        botIndexerFollowerMotor.configure(Configs.ShooterSubsystem.botIndexerFollowerMotorConfig, SparkMax.ResetMode.kResetSafeParameters, SparkMax.PersistMode.kPersistParameters);
-
         flywheelEncoder.setPosition(0);
         topIndexerEncoder.setPosition(0);
-        botIndexerEncoder.setPosition(0);
+      
 
 
     }
 
     //All three are velocity controlled 
-    public void setShooterVelocity(double f, double ti, double bi){
+    public void setShooterVelocity(double f, double ti){
 
-        flywheelController.setSetpoint(f, SparkFlex.ControlType.kDutyCycle);
-        topIndexerController.setSetpoint(ti, SparkMax.ControlType.kDutyCycle);
-        botIndexerController.setSetpoint(bi, SparkMax.ControlType.kDutyCycle);
+        flywheelController.setSetpoint(f, SparkFlex.ControlType.kVelocity);
+        topIndexerController.setSetpoint(ti, SparkMax.ControlType.kVelocity);
+      //  botIndexerController.setSetpoint(bi, SparkMax.ControlType.kDutyCycle);//Move to Floor
 
     }
 
     public Command shoot(){
         return this.startEnd( 
             () -> {
-            this.setShooterVelocity(ShooterSubsystemSetPoints.kFlywheelShoot,ShooterSubsystemSetPoints.ktopIndex, ShooterSubsystemSetPoints.kbotIndex);
+            this.setShooterVelocity(ShooterSubsystemSetPoints.kFlywheelShoot,ShooterSubsystemSetPoints.ktopIndex);
         }, () -> {
-            this.setShooterVelocity(0,0,0);
+            this.setShooterVelocity(0,0);
         });
     }
 
+    public Command unjamST(){
+        return this.startEnd( 
+            () -> {
+            this.setShooterVelocity(-1000,.1000);
+        }, () -> {
+            this.setShooterVelocity(0,0);
+        });
+    }
     @Override
      public void periodic() {
-        SmartDashboard.putNumber("Shooter | Bot Index Speed", botIndexerEncoder.getVelocity());
         SmartDashboard.putNumber("Shooter | Top Index Speed", topIndexerEncoder.getVelocity());    
         SmartDashboard.putNumber("Shooter | FLYWHEEL SPEED", flywheelEncoder.getVelocity());
+        SmartDashboard.putBoolean("Shooter | FLYWHEEL ON", flywheelEncoder.getVelocity() > 2);
+    
      }
 
     

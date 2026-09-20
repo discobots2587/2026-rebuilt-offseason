@@ -97,7 +97,7 @@ public final class Configs {
       .i(Constants.IntakeSubsystemConstants.kIntakeI)
       .d(Constants.IntakeSubsystemConstants.kIntakeD);
 
-      intakeMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(20); 
+      intakeMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(40); 
       intakeFollowerMotorConfig.apply(intakeMotorConfig).follow(Constants.IntakeSubsystemConstants.kIntakeFollowerMotorCanID, true); 
 
 
@@ -129,7 +129,7 @@ public final class Configs {
         .p(Constants.ShooterSubsystemConstants.kFlywheelP)
         .i(Constants.ShooterSubsystemConstants.kFlywheelI)
         .d(Constants.ShooterSubsystemConstants.kFlywheelD);
-        flywheelMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(30);
+        flywheelMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(50);
         
         flywheelFollowerMotorConfig.apply(flywheelMotorConfig).follow(Constants.ShooterSubsystemConstants.kflywheelMotorCanID, true);
 
@@ -137,7 +137,7 @@ public final class Configs {
         .p(Constants.ShooterSubsystemConstants.kFlywheelP)
         .i(Constants.ShooterSubsystemConstants.kFlywheelI)
         .d(Constants.ShooterSubsystemConstants.kFlywheelD);
-        topIndexerMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(30);
+        topIndexerMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(50);
         topIndexerFollowerMotorConfig.apply(topIndexerMotorConfig).follow(Constants.ShooterSubsystemConstants.ktopIndexerMotorCanID, true);
 
 
@@ -145,7 +145,7 @@ public final class Configs {
         .p(Constants.ShooterSubsystemConstants.kFlywheelP)
         .i(Constants.ShooterSubsystemConstants.kFlywheelI)
         .d(Constants.ShooterSubsystemConstants.kFlywheelD);
-        botIndexerMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(30);
+        botIndexerMotorConfig.idleMode(IdleMode.kCoast).smartCurrentLimit(50);
         botIndexerFollowerMotorConfig.apply(botIndexerMotorConfig).follow(Constants.ShooterSubsystemConstants.kbotIndexerMotorCanID, true);
 
       }

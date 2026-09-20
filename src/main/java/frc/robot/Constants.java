@@ -160,8 +160,8 @@ public final class Constants {
 
     public static final class IntakeMotorSetPoints{
       
-      public static double kIntakeFeed = -0.50; //Changed to velocity control for intake
-      public static double kIntakeOut = .5; 
+      public static double kIntakeFeed = -0.7; //Changed to velocity control for intake
+      public static double kIntakeOut = .7; 
 
       //PLEASE READ THIS BEFORE CHANGING OUT VALUES: slowly test out values 
       //Position is in rotations
@@ -185,12 +185,12 @@ public final class Constants {
     public static final int kbotFollowerIndexerMotorCanID = 61; //may become 66 
 
     //PID for flywheel
-    public static final double kFlywheelP = 0.05;
+    public static final double kFlywheelP = 0.0004;
     public static final double kFlywheelI = 0.0;
     public static final double kFlywheelD = 0.0;
 
     //PID for top indexer
-    public static final double ktopIndexerP = 0.05;
+    public static final double ktopIndexerP = 0.0004;
     public static final double ktopIndexerI = 0.0;
     public static final double ktopIndexerD = 0.0;
 
@@ -201,9 +201,9 @@ public final class Constants {
 
     public static final class ShooterSubsystemSetPoints{
 
-      public static double kFlywheelShoot = 0.6;
-      public static double ktopIndex = -.5;
-      public static double kbotIndex = .5;
+      public static double kFlywheelShoot = 3000;
+      public static double ktopIndex = -2750;
+      public static double kbotIndex = .375;
 
     }
 
