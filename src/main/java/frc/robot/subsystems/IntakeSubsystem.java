@@ -58,6 +58,15 @@ public class IntakeSubsystem extends SubsystemBase {
         });
     }
 
+ public Command stopFeedIntake(){
+        return this.startEnd( () -> {
+            this.setIntakeVelocity(0);
+        }, () -> {
+            this.setIntakeVelocity(0);
+        });
+    }
+
+
      public Command outIntake(){
         return this.startEnd( () -> {
             this.setIntakeVelocity(Constants.IntakeSubsystemConstants.IntakeMotorSetPoints.kIntakeOut);

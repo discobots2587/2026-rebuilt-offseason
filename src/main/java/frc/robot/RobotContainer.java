@@ -27,6 +27,9 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+
 
 import java.util.List;
 
@@ -56,6 +59,23 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+
+    //auto commands
+    NamedCommands.registerCommand("Shoot", m_shooter.shoot());
+    NamedCommands.registerCommand("Stop Shoot", m_shooter.stopShoot());
+
+    NamedCommands.registerCommand("Intake", m_intake.inIntakeRack());
+    NamedCommands.registerCommand("Outtake", m_intake.outIntakeRack());
+    NamedCommands.registerCommand("Intake Feed", m_intake.feedIntake());
+    NamedCommands.registerCommand("Stop Intake Feed", m_intake.stopFeedIntake());
+
+
+
+
+
+
+
+
     // Configure the button bindings
     configureButtonBindings();
 

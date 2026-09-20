@@ -64,6 +64,15 @@ public class ShooterSubsystem extends SubsystemBase {
         });
     }
 
+    public Command stopShoot(){
+        return this.startEnd( 
+            () -> {
+            this.setShooterVelocity(0,0);
+        }, () -> {
+            this.setShooterVelocity(0,0);
+        });
+    }
+
     public Command unjamST(){
         return this.startEnd( 
             () -> {
