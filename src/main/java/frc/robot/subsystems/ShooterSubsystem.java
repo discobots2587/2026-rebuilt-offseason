@@ -58,9 +58,9 @@ public class ShooterSubsystem extends SubsystemBase {
     //All three are velocity controlled 
     public void setShooterVelocity(double f, double ti, double bi){
 
-        flywheelController.setSetpoint(f, SparkFlex.ControlType.kVelocity);
-        topIndexerController.setSetpoint(ti, SparkMax.ControlType.kVelocity);
-        botIndexerController.setSetpoint(bi, SparkMax.ControlType.kVelocity);
+        flywheelController.setSetpoint(f, SparkFlex.ControlType.kDutyCycle);
+        topIndexerController.setSetpoint(ti, SparkMax.ControlType.kDutyCycle);
+        botIndexerController.setSetpoint(bi, SparkMax.ControlType.kDutyCycle);
 
     }
 
@@ -75,8 +75,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
     @Override
      public void periodic() {
-        SmartDashboard.putNumber("Shooter | Shooter Speed",flywheelEncoder.getVelocity());
-    
+        SmartDashboard.putNumber("Shooter | Bot Index Speed", botIndexerEncoder.getVelocity());
+        SmartDashboard.putNumber("Shooter | Top Index Speed", topIndexerEncoder.getVelocity());    
+        SmartDashboard.putNumber("Shooter | FLYWHEEL SPEED", flywheelEncoder.getVelocity());
      }
 
     

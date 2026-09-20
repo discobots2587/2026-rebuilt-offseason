@@ -101,7 +101,7 @@ public final class Configs {
       intakeFollowerMotorConfig.apply(intakeMotorConfig).follow(Constants.IntakeSubsystemConstants.kIntakeFollowerMotorCanID, true); 
 
 
-      intakeRackMotorConfig.closedLoop.feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
+      intakeRackMotorConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder)
       .p(Constants.IntakeSubsystemConstants.kIntakeRackP)
       .i(Constants.IntakeSubsystemConstants.kIntakeRackI)
       .d(Constants.IntakeSubsystemConstants.kIntakeRackD);

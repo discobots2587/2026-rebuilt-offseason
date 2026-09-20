@@ -148,25 +148,25 @@ public final class Constants {
 
 
     //for intake rollers
-    public static final double kIntakeP = 0.0;
+    public static final double kIntakeP = 0.05;
     public static final double kIntakeI = 0.0;
     public static final double kIntakeD = 0.0;
 
 
     //for intake rack (this is position controlled)
-    public static final double kIntakeRackP = 0.0;
+    public static final double kIntakeRackP = 0.05;
     public static final double kIntakeRackI = 0.0;
     public static final double kIntakeRackD = 0.0;
 
     public static final class IntakeMotorSetPoints{
       
-      public static double kIntakeFeed = .50; 
-      public static double kIntakeOut = -.50; 
+      public static double kIntakeFeed = -0.50; //Changed to velocity control for intake
+      public static double kIntakeOut = .5; 
 
       //PLEASE READ THIS BEFORE CHANGING OUT VALUES: slowly test out values 
       //Position is in rotations
-      public static double kIntakeRackOut = 0.0; // as name suggests, the intake will be going OUTWARDS
-      public static double kIntakeRackIn = 0.0; // as name suggests, the intake will be going INWARDS to the position 0
+      public static double kIntakeRackOut = 38; // might need to be 5.5
+      public static double kIntakeRackIn = -0.01; // as name suggests, the intake will be going INWARDS to the position 0
 
 
     }
@@ -185,25 +185,25 @@ public final class Constants {
     public static final int kbotFollowerIndexerMotorCanID = 61; //may become 66 
 
     //PID for flywheel
-    public static final double kFlywheelP = 0.0;
+    public static final double kFlywheelP = 0.05;
     public static final double kFlywheelI = 0.0;
     public static final double kFlywheelD = 0.0;
 
     //PID for top indexer
-    public static final double ktopIndexerP = 0.0;
+    public static final double ktopIndexerP = 0.05;
     public static final double ktopIndexerI = 0.0;
     public static final double ktopIndexerD = 0.0;
 
     //PID for bot indexer
-    public static final double kbotIndexerP = 0.0;
+    public static final double kbotIndexerP = 0.05;
     public static final double kbotIndexerI = 0.0;
     public static final double kbotIndexerD = 0.0;
 
     public static final class ShooterSubsystemSetPoints{
 
-      public static double kFlywheelShoot = 0.0;
-      public static double ktopIndex = 0.0;
-      public static double kbotIndex = 0.0;
+      public static double kFlywheelShoot = 0.6;
+      public static double ktopIndex = -.5;
+      public static double kbotIndex = .5;
 
     }
 

@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
@@ -46,7 +47,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
     //this is for intake rollers
     public void setIntakeVelocity(double v){ //v is for velocity in RPM
-        intakeController.setSetpoint(v, SparkMax.ControlType.kVelocity); //velocity controlled
+        intakeController.setSetpoint(v, SparkMax.ControlType.kDutyCycle); //velocity controlled
     }
 
     public Command feedIntake(){
@@ -84,6 +85,7 @@ public class IntakeSubsystem extends SubsystemBase {
      @Override
      public void periodic() {
         SmartDashboard.putNumber("Intake | Intake | Velocity",intakeEncoder.getVelocity());
+        SmartDashboard.putNumber("Intake | Rack Position", intakeRackEncoder.getPosition());
         
      }
     
