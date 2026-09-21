@@ -13,6 +13,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
@@ -29,7 +30,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 import java.util.List;
 
@@ -47,6 +48,9 @@ public class RobotContainer {
   private final IntakeSubsystem m_intake = new IntakeSubsystem();
   private final FloorSubsystem m_floor = new FloorSubsystem();
 
+  private SendableChooser<Command> AutoChooser;
+
+
 
 
 
@@ -58,21 +62,34 @@ public class RobotContainer {
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
+
   public RobotContainer() {
 
     //auto commands
     NamedCommands.registerCommand("Shoot", m_shooter.shoot());
     NamedCommands.registerCommand("Stop Shoot", m_shooter.stopShoot());
+    NamedCommands.registerCommand("Feed Shoot", m_floor.feedShooter());
+
 
     NamedCommands.registerCommand("Intake", m_intake.inIntakeRack());
     NamedCommands.registerCommand("Outtake", m_intake.outIntakeRack());
     NamedCommands.registerCommand("Intake Feed", m_intake.feedIntake());
     NamedCommands.registerCommand("Stop Intake Feed", m_intake.stopFeedIntake());
 
+    
 
-
-
-
+    //AutoChooser = AutoBuilder.buildAutoChooser();
+   // AutoChooser.setDefaultOption("None", new InstantCommand(() -> {}));
+    try {
+      AutoChooser = new SendableChooser<>();
+      AutoChooser = AutoBuilder.buildAutoChooser();
+    } catch (RuntimeException e)
+    {
+      e.printStackTrace();
+      AutoChooser = new SendableChooser<>();
+      AutoChooser.setDefaultOption("None", new InstantCommand(() -> {}));
+    }
+    SmartDashboard.putData("Auto Chooser", AutoChooser);
 
 
 
@@ -124,6 +141,7 @@ public class RobotContainer {
     m_driverController.leftTrigger().toggleOnTrue(m_intake.inIntakeRack());
     m_driverController.rightTrigger().toggleOnTrue(m_intake.outIntakeRack());
     m_driverController.rightBumper().whileTrue(m_intake.feedIntake());
+    m_driverController.leftBumper().whileTrue(m_intake.outIntake());
 
     m_operatorController.y().toggleOnTrue(m_floor.feedShooter()); 
     m_operatorController.b().toggleOnTrue(m_shooter.shoot()); 
@@ -141,43 +159,44 @@ public class RobotContainer {
    */
 
   public Command getAutonomousCommand() {
-    // Create config for trajectory
-    TrajectoryConfig config = new TrajectoryConfig(
-        AutoConstants.kMaxSpeedMetersPerSecond,
-        AutoConstants.kMaxAccelerationMetersPerSecondSquared)
-        // Add kinematics to ensure max speed is actually obeyed
-        .setKinematics(DriveConstants.kDriveKinematics);
+    // // Create config for trajectory
+    // TrajectoryConfig config = new TrajectoryConfig(
+    //     AutoConstants.kMaxSpeedMetersPerSecond,
+    //     AutoConstants.kMaxAccelerationMetersPerSecondSquared)
+    //     // Add kinematics to ensure max speed is actually obeyed
+    //     .setKinematics(DriveConstants.kDriveKinematics);
 
-    // An example trajectory to follow. All units in meters.
-    Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
-        // Start at the origin facing the +X direction
-        new Pose2d(0, 0, new Rotation2d(0)),
-        // Pass through these two interior waypoints, making an 's' curve path
-        List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
-        // End 3 meters straight ahead of where we started, facing forward
-        new Pose2d(3, 0, new Rotation2d(0)),
-        config);
+    // // An example trajectory to follow. All units in meters.
+    // Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
+    //     // Start at the origin facing the +X direction
+    //     new Pose2d(0, 0, new Rotation2d(0)),
+    //     // Pass through these two interior waypoints, making an 's' curve path
+    //     List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
+    //     // End 3 meters straight ahead of where we started, facing forward
+    //     new Pose2d(3, 0, new Rotation2d(0)),
+    //     config);
 
-    var thetaController = new ProfiledPIDController(
-        AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
-    thetaController.enableContinuousInput(-Math.PI, Math.PI);
+    // var thetaController = new ProfiledPIDController(
+    //     AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
+    // thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
-    SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
-        exampleTrajectory,
-        m_robotDrive::getPose, // Functional interface to feed supplier
-        DriveConstants.kDriveKinematics,
+    // SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
+    //     exampleTrajectory,
+    //     m_robotDrive::getPose, // Functional interface to feed supplier
+    //     DriveConstants.kDriveKinematics,
 
-        // Position controllers
-        new PIDController(AutoConstants.kPXController, 0, 0),
-        new PIDController(AutoConstants.kPYController, 0, 0),
-        thetaController,
-        m_robotDrive::setModuleStates,
-        m_robotDrive);
+    //     // Position controllers
+    //     new PIDController(AutoConstants.kPXController, 0, 0),
+    //     new PIDController(AutoConstants.kPYController, 0, 0),
+    //     thetaController,
+    //     m_robotDrive::setModuleStates,
+    //     m_robotDrive);
 
-    // Reset odometry to the starting pose of the trajectory.
-    m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
+    // // Reset odometry to the starting pose of the trajectory.
+    // m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
 
-    // Run path following command, then stop at the end.
-    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
+    // // Run path following command, then stop at the end.
+    // return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
+    return AutoChooser.getSelected();
   }
 }
